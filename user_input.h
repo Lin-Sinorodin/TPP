@@ -13,8 +13,8 @@ long getNumberFromUser(const std::string& msg);
  * Get a number from the user, raises if not a valid positive number.
  *
  * @param msg Message to print when asking for the number.
- * @return The number typed by the user, as long.
+ * @return The number typed by the user, as unsigned long.
  */
-long getPositiveNumberFromUser(const std::string& msg);
+unsigned long getPositiveNumberFromUser(const std::string& msg);
 
 #endif //TPP_USER_INPUT_H
