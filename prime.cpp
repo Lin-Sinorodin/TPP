@@ -9,7 +9,7 @@ bool isPrime(int num) {
     if (num < 0) {
         // p is prime if and only if -p is prime
         // https://math.stackexchange.com/a/1649531
-        num = -num;
+        return isPrime(std::abs(num));
     }
     if (num <= 2) {
         return true;

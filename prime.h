@@ -4,7 +4,7 @@
 /**
  * Check if the given number is even.
  *
- * @param num An int to check if satisfies (num % 2 == 0).
+ * @param num An int to check if it's even.
  * @return If even return true, else return false.
  */
 bool isEven(int num);
