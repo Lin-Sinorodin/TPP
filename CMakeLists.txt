@@ -5,4 +5,6 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(TPP main.cpp
         prime.cpp
-        prime.h)
+        prime.h
+        user_input.cpp
+        user_input.h)
