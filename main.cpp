@@ -2,24 +2,45 @@
 #include <cmath>
 #include <string>
 
-float getNumberFromUser(const std::string& msg) {
-    char buff[sizeof(int) * 8];
+/**
+ * Get a number from the user, raises if not a valid number.
+ *
+ * @param msg Message to print when asking for the number.
+ * @return The number typed by the user, as long.
+ */
+long getNumberFromUser(const std::string& msg) {
+    std::string num_str;
     std::cout << msg;
-    std::cin >> buff;
-    return strtof(buff, nullptr);
+    std::cin >> num_str;
+    return std::stol(num_str);
 }
 
-int squareRootCLI() {
-    float num = getNumberFromUser("Calculate square root of: ");
-    if (num <= 0) {
-        throw std::runtime_error("Invalid input!");
+/**
+ * Get a number from the user, raises if not a valid positive number.
+ *
+ * @param msg Message to print when asking for the number.
+ * @return The number typed by the user, as long.
+ */
+long getPositiveNumberFromUser(const std::string& msg) {
+    long num = getNumberFromUser(msg);
+    if (num < 0) {
+        throw std::invalid_argument("getPositiveNumberFromUser: negative value");
     }
+    return num;
+}
 
-    std::cout << "Square root: " << std::sqrt(num) << std::endl;
-    return 0;
-
+void squareRootCLI() {
+    try {
+        long num = getPositiveNumberFromUser("Calculate square root of: ");
+        std::cout << "Square root: " << std::sqrt(num) << '\n';
+    } catch (std::invalid_argument const& ex) {
+        std::cout << "[!] " << ex.what() << '\n';
+    } catch (std::out_of_range const& ex) {
+        std::cout << "[!] " << ex.what() << '\n';
+    }
 }
 
 int main() {
-    return squareRootCLI();
+    squareRootCLI();
+    return 0;
 }
