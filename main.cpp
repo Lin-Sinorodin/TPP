@@ -9,9 +9,10 @@
  * Print the multiplication table from 1 * 1 up to size * size.
  *
  * @param size The max value of the table.
+ * @param sep The seperator between each element in the table.
  */
 void printMultiplicationTable(unsigned int size, const std::string& sep) {
-    static int width = static_cast<int>(std::to_string(size * size).length());
+    const int width = static_cast<int>(std::to_string(size * size).length());
 
     for (int i = 1; i <= size; i++) {
         for (int j = 1; j <= size; j++) {
