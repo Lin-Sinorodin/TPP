@@ -4,26 +4,26 @@
 
 
 unsigned int maxElementWidth(const std::vector<int>& arr) {
-    auto max_number = std::max_element(arr.begin(), arr.end());
-    return static_cast<unsigned int>(std::to_string(*max_number).length());
+    auto maxNumber = std::max_element(arr.begin(), arr.end());
+    return static_cast<unsigned int>(std::to_string(*maxNumber).length());
 }
 
 void printPaddedElement(int element, unsigned int width) {
     std::cout << std::setw(static_cast<int>(width)) << std::left << element << ' ';
 }
 
-void printNewRowIfNeeded(int current_index, int row_length) {
+void printNewRowIfNeeded(int currentIndex, int rowLength) {
     // already printed elements_per_row elements, move to next row
-    if ((current_index + 1) % row_length == 0) {
+    if ((currentIndex + 1) % rowLength == 0) {
         std::cout << std::endl;
     }
 }
 
-void printArray(std::vector<int>& arr, int elements_per_row) {
-    const unsigned int element_width = maxElementWidth(arr);
+void printArray(std::vector<int>& arr, int elementsPerRow) {
+    const unsigned int elementWidth = maxElementWidth(arr);
     for (int i = 0; i < arr.size(); i++) {
-        printPaddedElement(arr[i], element_width);
-        printNewRowIfNeeded(i, elements_per_row);
+        printPaddedElement(arr[i], elementWidth);
+        printNewRowIfNeeded(i, elementsPerRow);
     }
     std::cout << std::endl;
 }

@@ -22,17 +22,17 @@ void printPaddedElement(int element, unsigned int width);
 /**
  * Check if the given index is at the end of the row specified by row_length, print new line if it is.
  *
- * @param current_index The index of the current element in the array.
- * @param row_length The specified row length, if element is at the end of the row than print new line.
+ * @param currentIndex The index of the current element in the array.
+ * @param rowLength The specified row length, if element is at the end of the row than print new line.
  */
-void printNewRowIfNeeded(int current_index, int row_length);
+void printNewRowIfNeeded(int currentIndex, int rowLength);
 
 /**
  * Print the given array of integers in order, with limited number of elements per row.
  *
  * @param arr A pointer to an array of integers.
- * @param elements_per_row The maximum number of elements per row in the printed output.
+ * @param elementsPerRow The maximum number of elements per row in the printed output.
  */
-void printArray(std::vector<int>& arr, int elements_per_row);
+void printArray(std::vector<int>& arr, int elementsPerRow);
 
 #endif //TPP_CLI_H

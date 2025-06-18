@@ -27,18 +27,18 @@ bool isPrime(int num) {
     return true;
 }
 
-int findNextPrime(int curr_num) {
-    while (!isPrime(curr_num)) {
-        curr_num++;
+int findNextPrime(int currNum) {
+    while (!isPrime(currNum)) {
+        currNum++;
     }
-    return curr_num;
+    return currNum;
 }
 
-void fillPrimesArray(std::vector<int>& primes_arr, unsigned int num_primes) {
+void fillPrimesArray(std::vector<int>& primesArr, unsigned int numPrimes) {
     int curr_num = 1;
-    for (int i = 0; i < num_primes; i++) {
+    for (int i = 0; i < numPrimes; i++) {
         curr_num = findNextPrime(curr_num);
-        primes_arr.push_back(curr_num);
+        primesArr.push_back(curr_num);
         curr_num++;
     }
 }
