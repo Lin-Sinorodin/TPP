@@ -16,13 +16,18 @@ public:
     /* Erases the contents of the string, which becomes an empty string (with a length of 0 characters). */
     void clear() noexcept;
 
-    /* Array like access to the string (reading and writing)*/
+    /* Array like access to the string (reading and writing). */
     char& operator[](std::size_t idx);
-    /* Const-array like access to the string (only reading) */
+    /* Const-array like access to the string (only reading). */
     const char& operator[](std::size_t idx) const;
 
-    /* Concatenating another string to the current string */
+    /* Concatenating another string to the current string. */
     String& operator+=(const String& rhs);
+
+    /* Insert the given String inside the current string, at location pos. */
+    void insert(std::size_t pos, const String& str);
+    /* Insert the given C string inside the current string, at location pos. */
+    void insert(std::size_t pos, const char cString[]);
 
     void print();
 private:

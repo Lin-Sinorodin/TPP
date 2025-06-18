@@ -61,6 +61,22 @@ String &String::operator+=(const String &rhs) {
     return *this;
 }
 
+void String::insert(std::size_t pos, const String &str) {
+    std::size_t new_m_size = m_size + str.m_size;
+    char* new_m_string = new char[new_m_size]{};
+    memcpy(new_m_string, m_string, pos);
+    memcpy(new_m_string + pos, str.m_string, str.m_size);
+    memcpy(new_m_string + pos + str.m_size, m_string + pos, m_size - pos);
+    delete[] m_string;
+    m_string = new_m_string;
+    m_size = new_m_size;
+}
+
+void String::insert(std::size_t pos, const char *cString) {
+    String temp{cString};
+    insert(pos, temp);
+}
+
 std::size_t cStringLen(const char* cString) {
     int length = 0;
     while (cString[length] != '\0') {
