@@ -42,6 +42,14 @@ void String::clear() noexcept {
     m_size = 0;
 }
 
+char &String::operator[](std::size_t idx) {
+    return m_string[idx];
+}
+
+const char &String::operator[](std::size_t idx) const {
+    return m_string[idx];
+}
+
 std::size_t cStringLen(const char* cString) {
     int length = 0;
     while (cString[length] != '\0') {

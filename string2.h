@@ -16,6 +16,11 @@ public:
     /* Erases the contents of the string, which becomes an empty string (with a length of 0 characters). */
     void clear() noexcept;
 
+    /* Array like access to the string (reading and writing)*/
+    char& operator[](std::size_t idx);
+    /* Const-array like access to the string (only reading) */
+    const char& operator[](std::size_t idx) const;
+
     void print();
 private:
     char* m_string;
