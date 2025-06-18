@@ -8,5 +8,5 @@ add_executable(TPP main.cpp
         prime.h
         user_input.cpp
         user_input.h
-        print.cpp
-        print.h)
+        cli.cpp
+        cli.h)

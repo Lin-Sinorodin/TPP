@@ -18,6 +18,7 @@ bool isPrime(int num) {
         return false;
     }
 
+    // all even numbers (except 2) are not prime, so we skip them by iterating with i+=2
     for (int i = 3; i < std::sqrt(num); i+=2) {
         if (num % i == 0) {
             return false;
@@ -26,20 +27,18 @@ bool isPrime(int num) {
     return true;
 }
 
-int findNextPrime(int& curr_num) {
+int findNextPrime(int curr_num) {
     while (!isPrime(curr_num)) {
         curr_num++;
     }
     return curr_num;
 }
 
-void fillPrimesArray(std::vector<int>& primes_arr, int num_primes) {
-    // reserve enough space in advance, for performance, and so we can use the arr.at(i) syntax
-    primes_arr.resize(num_primes);
-
+void fillPrimesArray(std::vector<int>& primes_arr, unsigned int num_primes) {
     int curr_num = 1;
     for (int i = 0; i < num_primes; i++) {
-        primes_arr.at(i) = findNextPrime(curr_num);
+        curr_num = findNextPrime(curr_num);
+        primes_arr.push_back(curr_num);
         curr_num++;
     }
 }

@@ -9,9 +9,9 @@ long getNumberFromUser(const std::string& msg) {
 
     try {
         return std::stol(numStr);
-    } catch (std::invalid_argument const& ex) {
+    } catch (std::invalid_argument const&) {
         throw std::invalid_argument("getNumberFromUser: not a number");
-    } catch (std::out_of_range const& ex) {
+    } catch (std::out_of_range const&) {
         throw std::out_of_range("getNumberFromUser: out of bounds");
     }
 }
