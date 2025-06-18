@@ -6,4 +6,5 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(TPP main.cpp
         calculator.cpp
         calculator.h
+        exceptions.cpp
         exceptions.h)

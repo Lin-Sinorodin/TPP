@@ -2,6 +2,7 @@
 #include "calculator.h"
 #include "exceptions.h"
 
+
 double Calculator::add(double a, double b) {
     return a + b;
 }
@@ -16,35 +17,42 @@ double Calculator::multiply(double a, double b) {
 
 double Calculator::divide(double a, double b) {
     if (b == 0) {
-        throw ZeroDivisionException("divided by zero");
+        std::string error = "zero division: " + calculationString(a, OPERATION_DIVIDE, b);
+        throw ZeroDivisionException(error);
     }
     return a / b;
 }
 
+std::string Calculator::calculationString(double a, char op, double b) {
+    return std::to_string(a) + " " + op + " " + std::to_string(b);
+}
+
 double Calculator::calculate(double a, char op, double b) {
     switch (op) {
-        case OP_ADD:
+        case OPERATION_ADD:
             return Calculator::add(a, b);
-        case OP_SUBTRACT:
+        case OPERATION_SUBTRACT:
             return Calculator::subtract(a, b);
-        case OP_MULTIPLY:
+        case OPERATION_MULTIPLY:
             return Calculator::multiply(a, b);
-        case OP_DIVIDE:
+        case OPERATION_DIVIDE:
             return Calculator::divide(a, b);
         default:
-            throw InvalidOperationException("unknown operation");
+            std::string error = "unknown operation: " + calculationString(a, op, b);
+            throw InvalidOperationException(error);
     }
 }
 
-void Calculator::calculatePrint(double a, char op, double b) {
+void calculatePrint(double a, char op, double b) {
     try {
-        double res = Calculator::calculate(a, op, b);
+        const double res = Calculator::calculate(a, op, b);
         std::cout << a << ' ' << op << ' ' << b << " = " << res << '\n';
     } catch (const InvalidOperationException& exception) {
-        std::cout << "[!] Unknown operation: " << a << ' ' << op << ' ' << b << '\n';
+        std::cerr << exception.what() << '\n';
     } catch (const ZeroDivisionException& exception) {
-        std::cout << "[!] Zero division: " << a << ' ' << op << ' ' << b << '\n';
+        std::cerr << exception.what() << '\n';
     } catch (const std::exception& exception) {
-        std::cout << "[!] Exception (" << exception.what() << "):" << a << ' ' << op << ' ' << b << '\n';
+        std::string calculation = Calculator::calculationString(a, op, b);
+        std::cerr << "[!] Exception (" << exception.what() << "):" << calculation << '\n';
     }
 }

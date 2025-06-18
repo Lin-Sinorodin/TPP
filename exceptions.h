@@ -3,24 +3,24 @@
 
 #include <exception>
 #include <string>
-#include <string_view>
+#include <utility>
 
 /* Exception for invalid calculator operation */
 class InvalidOperationException : public std::exception {
-private:
-    std::string m_error{};
 public:
-    explicit InvalidOperationException(std::string_view error) : m_error{error} {}
-    [[nodiscard]] const char* what() const noexcept override { return m_error.c_str(); }
+    explicit InvalidOperationException(std::string error) : m_error{std::move(error)} {}
+    [[nodiscard]] const char* what() const noexcept override;
+private:
+    std::string m_error;
 };
 
 /* Exception for calculator zero division */
 class ZeroDivisionException : public std::exception {
-private:
-    std::string m_error{};
 public:
-    explicit ZeroDivisionException(std::string_view error) : m_error{error} {}
-    [[nodiscard]] const char* what() const noexcept override { return m_error.c_str(); }
+    explicit ZeroDivisionException(std::string error) : m_error{std::move(error)} {}
+    [[nodiscard]] const char* what() const noexcept override;
+private:
+    std::string m_error;
 };
 
 #endif //TPP_EXCEPTIONS_H
