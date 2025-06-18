@@ -1,6 +1,9 @@
 #include <iostream>
+#include "string2.h"
+
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    String str{ "Hello"};
+    str.print();
     return 0;
 }
