@@ -7,6 +7,12 @@ public:
     explicit String (const char cString[]);
     ~String ();
 
+    /* Returns whether the string is empty (i.e. whether its length is 0). */
+    [[nodiscard]] bool empty() const noexcept;
+
+    /* Erases the contents of the string, which becomes an empty string (with a length of 0 characters). */
+    void clear() noexcept;
+
     void print();
 private:
     char* m_string;

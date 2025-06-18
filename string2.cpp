@@ -28,6 +28,16 @@ void String::print() {
     std::cout << std::endl;
 }
 
+bool String::empty() const noexcept {
+    return m_size == 0;
+}
+
+void String::clear() noexcept {
+    delete[] m_string;
+    m_string = new char[]{};
+    m_size = 0;
+}
+
 std::size_t cStringLen(const char* cString) {
     int length = 0;
     while (cString[length] != '\0') {
