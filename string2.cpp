@@ -10,7 +10,7 @@ String::String() {
 String::String(const char cString[]) {
     m_size = cStringLen(cString);
     m_string = new char[m_size]{};
-    std::cout << "Allocated string with size: " << m_size << std::endl;
+//    std::cout << "Allocated string with size: " << m_size << std::endl;
     for (int i = 0; i < m_size; i ++) {
         m_string[i] = cString[i];
     }
@@ -18,7 +18,7 @@ String::String(const char cString[]) {
 
 String::~String() {
     delete[] m_string;
-    std::cout << "Deallocated string\n";
+//    std::cout << "Deallocated string\n";
 }
 
 void String::print() {
@@ -73,8 +73,29 @@ void String::insert(std::size_t pos, const String &str) {
 }
 
 void String::insert(std::size_t pos, const char *cString) {
-    String temp{cString};
-    insert(pos, temp);
+    insert(pos, static_cast<String>(cString));
+}
+
+std::size_t String::find(const String &str, size_t pos) const noexcept {
+    int j;
+    std::size_t found_idx = npos;  // initialized to not found
+
+    for (int i = static_cast<int>(pos); i < m_size; i++) {
+        for (j=0; j < str.m_size; j++) {
+            if (m_string[i + j] != str.m_string[j]) {
+                break;
+            }
+        }
+        if (j == str.m_size) {
+            found_idx = static_cast<std::size_t>(i);
+            break;
+        }
+    }
+    return found_idx;
+}
+
+std::size_t String::find(const char *cString, size_t pos) const {
+    return find(static_cast<String>(cString), pos);
 }
 
 std::size_t cStringLen(const char* cString) {

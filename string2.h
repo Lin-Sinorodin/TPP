@@ -29,10 +29,16 @@ public:
     /* Insert the given C string inside the current string, at location pos. */
     void insert(std::size_t pos, const char cString[]);
 
+    /* search for the first occurrence of the given String, after position pos in the current string. */
+    [[nodiscard]] std::size_t find(const String& str, size_t pos = 0) const noexcept;
+    /* search for the first occurrence of the given C string, after position pos in the current string. */
+    [[nodiscard]] std::size_t find(const char cString[], size_t pos = 0) const;
+
     void print();
 private:
     char* m_string;
     std::size_t m_size;
+    static const std::size_t npos = -1;  // borrowed from std::string::npos
 };
 
 /* Calculate the length of a C style string. */
