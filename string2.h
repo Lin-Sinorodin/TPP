@@ -21,6 +21,9 @@ public:
     /* Const-array like access to the string (only reading) */
     const char& operator[](std::size_t idx) const;
 
+    /* Concatenating another string to the current string */
+    String& operator+=(const String& rhs);
+
     void print();
 private:
     char* m_string;

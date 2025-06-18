@@ -50,6 +50,17 @@ const char &String::operator[](std::size_t idx) const {
     return m_string[idx];
 }
 
+String &String::operator+=(const String &rhs) {
+    std::size_t new_m_size = m_size + rhs.m_size;
+    char* new_m_string = new char[new_m_size]{};
+    memcpy(new_m_string, m_string, m_size);
+    memcpy(new_m_string + m_size, rhs.m_string, rhs.m_size);
+    delete[] m_string;
+    m_string = new_m_string;
+    m_size = new_m_size;
+    return *this;
+}
+
 std::size_t cStringLen(const char* cString) {
     int length = 0;
     while (cString[length] != '\0') {
