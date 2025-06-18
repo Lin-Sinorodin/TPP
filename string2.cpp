@@ -28,6 +28,10 @@ void String::print() {
     std::cout << std::endl;
 }
 
+std::size_t String::length() const noexcept {
+    return m_size;
+}
+
 bool String::empty() const noexcept {
     return m_size == 0;
 }

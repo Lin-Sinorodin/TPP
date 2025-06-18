@@ -7,6 +7,9 @@ public:
     explicit String (const char cString[]);
     ~String ();
 
+    /* Returns the length of the string, in terms of bytes. */
+    [[nodiscard]] std::size_t length() const noexcept;
+
     /* Returns whether the string is empty (i.e. whether its length is 0). */
     [[nodiscard]] bool empty() const noexcept;
 
