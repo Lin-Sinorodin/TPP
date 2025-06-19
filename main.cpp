@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <numeric>
 
 using namespace std;
 
@@ -18,16 +19,20 @@ int main() {
     v1.erase(remove_if(v1.begin(), v1.end(), [](int i) {return i < 8;}), v1.end());
 
     // 5 - print v1
-    copy(v1.begin(), v1.end(), std::ostream_iterator<int>(std::cout, " "));
+    copy(v1.begin(), v1.end(), ostream_iterator<int>(cout, " "));
 
     // 6 - initialize a new empty vector (v2)
     vector<int> v2 {};
 
     // 7 - fill v2 with the difference between values from v1
+    adjacent_difference(v1.begin(), v1.end(), back_inserter(v2));
 
     // 8 - print v2
+    cout << endl;
+    copy(v2.begin(), v2.end(), ostream_iterator<int>(cout, " "));
 
     // 9 - print the sum of all elements in v2
+    cout << "\nQ9: " << accumulate(v2.begin(), v2.end(), 0) << endl;
 
     return 0;
 }
