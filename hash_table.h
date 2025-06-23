@@ -19,27 +19,30 @@ public:
     /* Add a pair of key, value to the hash table. */
     void add(const string& key, const string& value);
 
-    /* Check if the given key exists in the keys of the hash table. */
-    bool keyExists(const string& key);
-
-    /* Check if the given values exists in the values of the hash table. */
-    bool valueExists(const string& value);
-
-    /* Get the value represented by the given key from the hash table. */
-    string getByKey(const string& key);
-
     /* Delete the value represented by the given key from the hash table. */
     void deleteByKey(const string& key);
 
     /* Increase the size of the table and rearrange all elements according to the new size. */
     void increaseTableSize();
 
+    /* Check if the given key exists in the keys of the hash table. */
+    [[nodiscard]] bool keyExists(const string& key) const;
+
+    /* Check if the given values exists in the values of the hash table. */
+    [[nodiscard]] bool valueExists(const string& value) const;
+
+    /* Get the value represented by the given key from the hash table. */
+    [[nodiscard]] string getByKey(const string& key) const;
+
     /* Return the number of the underlying array of the hash table. */
-    size_t numElements();
+    [[nodiscard]] size_t numElements() const;
 
     /* Return the number of the values in the hash table. */
-    size_t size();
+    [[nodiscard]] size_t size() const;
 private:
+    /* Size of the underlying array of the hash table. */
+    size_t m_size;
+
     /* Underlying array of the hash table. */
     vector<KeyValueList> m_arr;
 
@@ -47,10 +50,10 @@ private:
     float m_maxRelativeCollision = 0.1;
 
     /* Convert a key to an index in the hash table array. */
-    size_t keyToIndex(const string& key);
+    [[nodiscard]] size_t keyToIndex(const string& key) const;
 
     /* Get the relative collision ratio for the given list, defined by: max(collisions[index]/size). */
-    float getRelativeCollision(const KeyValueList& list);
+    [[nodiscard]] float getRelativeCollision(const KeyValueList& list) const;
 };
 
 #endif //TPP_HASH_TABLE_H
