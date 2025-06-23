@@ -28,5 +28,5 @@ string keyToValueFromList(const KeyValueList &list, const string &key) {
 
 void deleteKeyFromList(KeyValueList &list, const string &key) {
     list.erase(find_if(list.begin(), list.end(),
-                       [&key](const KeyValue& kv) {return kv.first == key;}), list.end());
+                       [&key](const KeyValue& kv) {return kv.first == key;}));
 }
