@@ -15,9 +15,11 @@ HashTable &HashTable::operator=(const HashTable& other) {
 
 void HashTable::add(const string& key, const string& value) {
     size_t index = keyToIndex(key);
-    KeyValueList list = m_arr.at(index);
     if (!keyExists(key)) {
         m_arr.at(index).emplace_back(key, value);
+    }
+    if (getRelativeCollision(m_arr.at(index)) > m_maxRelativeCollision) {
+        increaseTableSize();
     }
 }
 
@@ -41,10 +43,18 @@ void HashTable::deleteByKey(const string &key) {
     deleteKeyFromList(m_arr.at(index), key);
 }
 
+void HashTable::increaseTableSize() {
+    // TODO
+}
+
 size_t HashTable::numElements() {
     size_t n{0};
     std::for_each(m_arr.begin(), m_arr.end(), [&n](const KeyValueList& list){n += numElementsInList(list);});
     return n;
+}
+
+float HashTable::getRelativeCollision(const KeyValueList &list) {
+    return static_cast<float>(numElementsInList(list)) / static_cast<float>(numElements());
 }
 
 size_t HashTable::size() {

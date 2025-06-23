@@ -31,6 +31,9 @@ public:
     /* Delete the value represented by the given key from the hash table. */
     void deleteByKey(const string& key);
 
+    /* Increase the size of the table and rearrange all elements according to the new size. */
+    void increaseTableSize();
+
     /* Return the number of the underlying array of the hash table. */
     size_t numElements();
 
@@ -40,8 +43,14 @@ private:
     /* Underlying array of the hash table. */
     vector<KeyValueList> m_arr;
 
+    /* The maximum allowed value for max(collisions[index]/size), increase size when reached. */
+    float m_maxRelativeCollision = 0.1;
+
     /* Convert a key to an index in the hash table array. */
     size_t keyToIndex(const string& key);
+
+    /* Get the relative collision ratio for the given list, defined by: max(collisions[index]/size). */
+    float getRelativeCollision(const KeyValueList& list);
 };
 
 #endif //TPP_HASH_TABLE_H
