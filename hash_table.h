@@ -34,10 +34,10 @@ public:
     /* Get the value represented by the given key from the hash table. */
     [[nodiscard]] string getByKey(const string& key) const;
 
-    /* Return the number of the underlying array of the hash table. */
+    /* Return the number of (key, value) pairs in the hash table. */
     [[nodiscard]] size_t numElements() const;
 
-    /* Return the number of the values in the hash table. */
+    /* Return the size of the underlying array of the hash table. */
     [[nodiscard]] size_t size() const;
 private:
     /* Size of the underlying array of the hash table. */
@@ -47,12 +47,15 @@ private:
     vector<KeyValueList> m_arr;
 
     /* The maximum allowed value for max(collisions[index]/size), increase size when reached. */
-    float m_maxRelativeCollision = 0.1;
+    float m_maxRelativeCollision = 0.5;
+
+    /* The multiplier of the new array size when resizing (new_size = m_resizeFactor * old_size) */
+    double m_resizeFactor = 2.0;
 
     /* Convert a key to an index in the hash table array. */
     [[nodiscard]] size_t keyToIndex(const string& key) const;
 
-    /* Get the relative collision ratio for the given list, defined by: max(collisions[index]/size). */
+    /* Get the relative collision ratio for the given list, defined by: collisions/size (collisions = list size). */
     [[nodiscard]] float getRelativeCollision(const KeyValueList& list) const;
 };
 

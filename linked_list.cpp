@@ -3,10 +3,6 @@
 using std::any_of;
 using std::find_if;
 
-std::size_t numElementsInList(const KeyValueList &list) {
-    return std::count_if(list.begin(), list.end(), [](const KeyValue& kv) {return !kv.first.empty();});
-}
-
 bool keyInList(const KeyValueList& list, const string &key) {
     return any_of(list.begin(), list.end(),
                   [&key](const KeyValue& kv) {return kv.first == key;});
@@ -23,7 +19,7 @@ string keyToValueFromList(const KeyValueList &list, const string &key) {
     if (it != list.end()) {
         return it->second;
     }
-    return "";
+    return string{};
 }
 
 void deleteKeyFromList(KeyValueList &list, const string &key) {
