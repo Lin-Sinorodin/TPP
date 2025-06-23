@@ -13,6 +13,9 @@ using KeyValue = std::pair<string, string>;
 /* A linked list with elements consists of key and value, format: (key, value) -> (key, value) -> ... */
 using KeyValueList = std::list<KeyValue>;
 
+/* Return the number of elements in the given KeyValue list. */
+std::size_t numElementsInList(const KeyValueList &list);
+
 /* Return whether the key is inside the given KeyValue list. */
 bool keyInList(const KeyValueList& list, const string& key);
 

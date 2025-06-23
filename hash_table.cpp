@@ -43,7 +43,7 @@ void HashTable::deleteByKey(const string &key) {
 
 size_t HashTable::numElements() {
     size_t n{0};
-    std::for_each(m_arr.begin(), m_arr.end(), [&n](const KeyValueList& list){n += list.size();});
+    std::for_each(m_arr.begin(), m_arr.end(), [&n](const KeyValueList& list){n += numElementsInList(list);});
     return n;
 }
 
