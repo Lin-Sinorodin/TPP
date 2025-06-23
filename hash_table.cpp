@@ -1,7 +1,7 @@
 #include "hash_table.h"
 
-HashTable::HashTable(std::size_t size) {
-    m_arr = std::vector<std::string>{size, ""};
+HashTable::HashTable(size_t size) {
+    m_arr = vector<KeyValueList>{size, KeyValueList{KeyValue{"", ""}}};
 }
 
 HashTable::HashTable(const HashTable &other) {
@@ -13,41 +13,46 @@ HashTable &HashTable::operator=(const HashTable& other) {
     return *this;
 }
 
-void HashTable::add(const std::string& key, const std::string& value) {
-    m_arr.at(keyToIndex(key)) = value;
-}
-
-bool HashTable::keyExists(const std::string &key) {
-    return not m_arr.at(keyToIndex(key)).empty();
-}
-
-bool HashTable::valueExists(const std::string &value) {
-    for (const auto& elem: m_arr) {
-        if (elem == value) {
-            return true;
-        }
+void HashTable::add(const string& key, const string& value) {
+    size_t index = keyToIndex(key);
+    KeyValueList list = m_arr.at(index);
+    if (!keyExists(key)) {
+        m_arr.at(index).emplace_back(key, value);
     }
-    return std::any_of(m_arr.begin(), m_arr.end(), [&value](std::string& s) {return value == s;});
 }
 
-std::string HashTable::getByKey(const std::string &key) {
-    return m_arr.at(keyToIndex(key));
+bool HashTable::keyExists(const string &key) {
+    size_t index = keyToIndex(key);
+    return keyInList(m_arr.at(index), key);
 }
 
-void HashTable::deleteByKey(const std::string &key) {
-    m_arr.at(keyToIndex(key)) = "";
+bool HashTable::valueExists(const string &value) {
+    return std::any_of(m_arr.begin(), m_arr.end(),
+                       [&value](const KeyValueList& list) {return valueInList(list, value);});
 }
 
-std::size_t HashTable::numElements() {
-    return std::count_if(m_arr.begin(), m_arr.end(), [](std::string& s) {return not s.empty();});
+string HashTable::getByKey(const string &key) {
+    size_t index = keyToIndex(key);
+    return keyToValueFromList(m_arr.at(index), key);
 }
 
-std::size_t HashTable::size() {
+void HashTable::deleteByKey(const string &key) {
+    size_t index = keyToIndex(key);
+    deleteKeyFromList(m_arr.at(index), key);
+}
+
+size_t HashTable::numElements() {
+    size_t n{0};
+    std::for_each(m_arr.begin(), m_arr.end(), [&n](const KeyValueList& list){n += list.size();});
+    return n;
+}
+
+size_t HashTable::size() {
     return m_arr.size();
 }
 
-std::size_t HashTable::keyToIndex(const std::string &key) {
-    std::size_t key_hash = std::hash<std::string>{}(key);
-    std::size_t key_index = key_hash % size();
+size_t HashTable::keyToIndex(const string &key) {
+    size_t key_hash = std::hash<string>{}(key);
+    size_t key_index = key_hash % size();
     return key_index;
 }
