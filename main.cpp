@@ -2,18 +2,29 @@
 #include "hash_table.h"
 
 int main() {
-    HashTable countryToCapital{100};
+    std::cout << "Country to Capital Hash Table" << std::endl;
+    HashTable countryToCapital{3};
+    countryToCapital.add("Argentina", "Buenos Aires");
+    countryToCapital.add("China", "Beijing");
+    countryToCapital.add("France", "Paris");
+    countryToCapital.add("Germany", "Berlin");
+    countryToCapital.add("Hungary", "Budapest");
+    countryToCapital.add("India", "New Delhi");
     countryToCapital.add("Israel", "Jerusalem");
-    HashTable countryToCapital1{countryToCapital};
-    std::cout << countryToCapital1.numElements() << std::endl;
+    countryToCapital.add("Italy", "Rome");
+    countryToCapital.add("Japan", "Tokyo");
+    countryToCapital.add("Thailand", "Bangkok");
+    countryToCapital.add("UK", "London");
 
-    std::cout << countryToCapital.size() << std::endl;
-    std::cout << countryToCapital.numElements() << std::endl;
-    std::cout << countryToCapital.getByKey("Israel") << std::endl;
-    std::cout << countryToCapital.keyExists("Israel") << std::endl;
-    std::cout << countryToCapital.valueExists("Jerusalem") << std::endl;
+    std::cout << "size():                 " << countryToCapital.size() << std::endl;
+    std::cout << "numElements():          " << countryToCapital.numElements() << std::endl;
+    std::cout << "getByKey(Israel):       " << countryToCapital.getByKey("Israel") << std::endl;
+    std::cout << "keyExists(Israel):      " << countryToCapital.keyExists("Israel") << std::endl;
+    std::cout << "valueExists(Jerusalem): " << "" << countryToCapital.valueExists("Jerusalem") << std::endl;
+
+    std::cout << "deleteByKey(Israel)" << std::endl;
     countryToCapital.deleteByKey("Israel");
-    std::cout << countryToCapital.numElements() << std::endl;
+    std::cout << "numElements():          " << countryToCapital.numElements() << std::endl;
 
     return 0;
 }
